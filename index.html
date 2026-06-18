@@ -1,7 +1,388 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <h1>Welcome to my Personal Page</h1>
-    <p>Hoseted on Github Pages!</p>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jiyeon Lee — Computer Science, SNU</title>
+  <meta name="description" content="Jiyeon Lee — Computer Science undergraduate at Seoul National University. Applied machine learning and deep learning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#FBFBFA;
+      --ink:#18181B;
+      --muted:#6E6E73;
+      --line:#E6E5E1;
+      --accent:#21466B;
+      --chip:#EEF2F6;
+      --serif:'Newsreader', Georgia, 'Times New Roman', serif;
+      --mono:'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+    body{
+      margin:0;
+      background:var(--paper);
+      color:var(--ink);
+      font-family:var(--serif);
+      font-size:17px;
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    .wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+    a{color:var(--accent);text-decoration:none;}
+    a:hover{text-decoration:underline;text-underline-offset:3px;}
+    a:focus-visible, button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+
+    /* eyebrow / labels */
+    .eyebrow{
+      font-family:var(--mono);
+      font-size:.7rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin:0 0 .9rem;
+    }
+
+    /* nav */
+    .nav{
+      position:sticky;top:0;z-index:10;
+      background:color-mix(in srgb, var(--paper) 88%, transparent);
+      backdrop-filter:saturate(180%) blur(8px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav .wrap{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:1rem;flex-wrap:wrap;padding-top:14px;padding-bottom:14px;
+    }
+    .brand{font-family:var(--mono);font-size:.82rem;font-weight:500;letter-spacing:.02em;color:var(--ink);}
+    .nav-links{display:flex;flex-wrap:wrap;gap:1.1rem;}
+    .nav-links a{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--muted);}
+    .nav-links a:hover{color:var(--ink);text-decoration:none;}
+
+    /* hero */
+    .hero{padding:4.5rem 0 3.25rem;}
+    .hero-grid{display:flex;gap:2.5rem;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;}
+    .hero-text{flex:1 1 340px;min-width:0;}
+    h1{
+      font-family:var(--serif);
+      font-weight:500;
+      font-size:clamp(2.6rem, 7vw, 4.1rem);
+      line-height:1.04;
+      letter-spacing:-.01em;
+      margin:0 0 .35rem;
+    }
+    .hangul{font-family:var(--serif);font-size:1.05rem;color:var(--muted);margin:0 0 1.4rem;}
+    .lead{font-size:1.18rem;line-height:1.55;margin:0 0 1.2rem;max-width:46ch;}
+    .cred{font-family:var(--mono);font-size:.76rem;letter-spacing:.02em;color:var(--accent);margin:0 0 1.6rem;}
+    .actions{display:flex;flex-wrap:wrap;gap:.55rem .7rem;}
+    .btn{
+      font-family:var(--mono);font-size:.76rem;letter-spacing:.03em;
+      border:1px solid var(--ink);color:var(--ink);
+      padding:.5rem .85rem;border-radius:3px;
+      transition:background .15s ease, color .15s ease;
+    }
+    .btn:hover{background:var(--ink);color:var(--paper);text-decoration:none;}
+    .btn.ghost{border-color:var(--line);color:var(--muted);}
+    .btn.ghost:hover{background:transparent;border-color:var(--ink);color:var(--ink);}
+
+    /* avatar */
+    .avatar{
+      position:relative;flex:0 0 auto;
+      width:132px;height:132px;border-radius:50%;
+      background:linear-gradient(160deg,#26517a,#1b3a59);
+      display:grid;place-items:center;overflow:hidden;
+      box-shadow:0 1px 0 var(--line);
+    }
+    .avatar .mono{font-family:var(--mono);font-size:2.2rem;letter-spacing:.04em;color:#fff;opacity:.95;}
+    .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+    /* sections */
+    .block{padding:3rem 0;border-top:1px solid var(--line);}
+    .block h2{
+      font-family:var(--serif);font-weight:500;font-size:1.75rem;
+      letter-spacing:-.01em;margin:.1rem 0 1.2rem;
+    }
+    .block p{margin:0 0 1rem;}
+    .block p:last-child{margin-bottom:0;}
+
+    /* key/value rows */
+    .rows{display:flex;flex-direction:column;gap:.85rem;}
+    .row{display:grid;grid-template-columns:150px 1fr;gap:1rem;align-items:baseline;}
+    .row-key{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:.12rem;}
+    .row-val{font-size:1.02rem;}
+    .row-val .sub{display:block;color:var(--muted);font-size:.96rem;margin-top:.15rem;}
+
+    /* selected work */
+    .work{display:flex;flex-direction:column;}
+    .work-item{padding:1.5rem 0;border-top:1px dashed var(--line);}
+    .work-item:first-child{border-top:none;padding-top:0;}
+    .work-top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline;}
+    .work-title{font-family:var(--serif);font-weight:600;font-size:1.18rem;margin:0;}
+    .work-meta{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--muted);white-space:nowrap;}
+    .work-desc{margin:.5rem 0 .75rem;color:#3a3a3e;}
+    .chips{display:flex;flex-wrap:wrap;gap:.4rem;}
+    .chip{
+      font-family:var(--mono);font-size:.7rem;letter-spacing:.02em;
+      background:var(--chip);color:var(--accent);
+      padding:.28rem .55rem;border-radius:3px;
+    }
+
+    /* tag list (courses) */
+    .tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+    .tag{font-family:var(--mono);font-size:.76rem;border:1px solid var(--line);border-radius:3px;padding:.35rem .65rem;color:var(--ink);}
+    .note{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:1rem;letter-spacing:.01em;}
+
+    /* contact */
+    .contact-list{display:flex;flex-direction:column;gap:.6rem;}
+    .contact-list .row{grid-template-columns:120px 1fr;}
+
+    /* footer / ai usage */
+    .foot{border-top:1px solid var(--line);padding:2.5rem 0 3.5rem;}
+    .foot .eyebrow{margin-bottom:.7rem;}
+    .foot p{font-size:.92rem;color:var(--muted);margin:0 0 .5rem;}
+    .foot .prompt{font-family:var(--mono);font-size:.78rem;color:#3a3a3e;background:var(--chip);border-radius:4px;padding:.7rem .85rem;line-height:1.5;margin:.4rem 0 1.4rem;}
+    .copyright{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.02em;}
+
+    /* load motion */
+    .fade{opacity:0;transform:translateY(8px);animation:rise .6s ease forwards;}
+    @keyframes rise{to{opacity:1;transform:none;}}
+    @media (prefers-reduced-motion: reduce){.fade{opacity:1;transform:none;animation:none;}}
+
+    @media (max-width:600px){
+      .row, .contact-list .row{grid-template-columns:1fr;gap:.15rem;}
+      .row-key{padding-top:0;}
+      .hero{padding-top:3.25rem;}
+      .avatar{width:104px;height:104px;}
+      .avatar .mono{font-size:1.8rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap">
+      <span class="brand">Jiyeon Lee</span>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#courses">Courses</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid fade">
+        <div class="hero-text">
+          <p class="eyebrow">Computer Science · Seoul National University</p>
+          <h1>Jiyeon&nbsp;Lee</h1>
+          <p class="hangul">이지연</p>
+          <p class="lead">Second-year CS undergraduate working on applied machine learning — from biomedical image classification to efficient video captioning.</p>
+          <p class="cred">Presidential Science Scholar · 1 of 60 nationwide</p>
+          <div class="actions">
+            <!-- Add your CV file at assets/cv.pdf for this link to work -->
+            <a class="btn" href="assets/cv.pdf">View CV →</a>
+            <a class="btn ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
+        <!-- To use a real photo, place it at assets/profile.jpg (the monogram shows if the file is missing) -->
+        <div class="avatar" aria-hidden="true">
+          <span class="mono">JL</span>
+          <img src="assets/profile.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="block" id="about">
+      <div class="wrap">
+        <p class="eyebrow">About</p>
+        <h2>About me</h2>
+        <p>I'm a Computer Science undergraduate at Seoul National University, focused on applied machine learning and deep learning. My work spans computer vision, natural language processing, and full-stack development, with a consistent interest in making models accurate <em>and</em> efficient enough to be practical.</p>
+        <p>I enjoy turning research questions into working systems — building datasets, training models, and validating results against independent evidence.</p>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="block" id="education">
+      <div class="wrap">
+        <p class="eyebrow">Education</p>
+        <h2>Education</h2>
+        <div class="rows">
+          <div class="row">
+            <span class="row-key">Degree</span>
+            <span class="row-val">B.S. in Computer Science<span class="sub">Seoul National University · Mar 2025 – Present</span></span>
+          </div>
+          <div class="row">
+            <span class="row-key">GPA</span>
+            <span class="row-val">Major 4.30 / 4.30 · Overall 4.14 / 4.30</span>
+          </div>
+          <div class="row">
+            <span class="row-key">Scholarship</span>
+            <span class="row-val">Presidential Science Scholar (National Merit)<span class="sub">Selected as 1 of 60 students nationwide for research potential in CS.</span></span>
+          </div>
+          <div class="row">
+            <span class="row-key">Coursework</span>
+            <span class="row-val">Discrete Mathematics · Data Structures · Linear Algebra · Database · Big Data · Object-Oriented Programming · Introduction to Information Security &amp; Blockchain · Principles of Accounting</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK -->
+    <section class="block" id="work">
+      <div class="wrap">
+        <p class="eyebrow">Selected Work</p>
+        <h2>Projects</h2>
+        <div class="work">
+
+          <article class="work-item">
+            <div class="work-top">
+              <h3 class="work-title">Gut Microbiome Health Classifier</h3>
+              <span class="work-meta">2024 · TensorFlow</span>
+            </div>
+            <p class="work-desc">A multi-class CNN that predicts larval gut-health states from Gram-stained microscopy images alone, validated against SEM-EDS elemental analysis and metagenomic sequencing.</p>
+            <div class="chips">
+              <span class="chip">96% accuracy</span>
+              <span class="chip">CNN</span>
+              <span class="chip">image classification</span>
+            </div>
+          </article>
+
+          <article class="work-item">
+            <div class="work-top">
+              <h3 class="work-title">Frame-Drop Strategy for Real-Time Driving Captioning</h3>
+              <span class="work-meta">2024 · PyTorch</span>
+            </div>
+            <p class="work-desc">A video-captioning pipeline (ViT encoder + GPT-2 decoder) for autonomous-driving scenes, with a systematic study of the speed–quality tradeoff across frame-sampling rates.</p>
+            <div class="chips">
+              <span class="chip">BLEU 0.42</span>
+              <span class="chip">−80% inference time</span>
+              <span class="chip">ViT · GPT-2</span>
+            </div>
+          </article>
+
+          <article class="work-item">
+            <div class="work-top">
+              <h3 class="work-title">Virtual Wardrobe Web Application</h3>
+              <span class="work-meta">2023 · Django</span>
+            </div>
+            <p class="work-desc">A full-stack wardrobe-management app with secure email-verified authentication and hashtag search, iterated through real beta testing and shipped to production.</p>
+            <div class="chips">
+              <span class="chip">full-stack</span>
+              <span class="chip">deployed</span>
+              <span class="chip">Django · JS</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section class="block" id="awards">
+      <div class="wrap">
+        <p class="eyebrow">Awards &amp; Honors</p>
+        <h2>Awards</h2>
+        <div class="rows">
+          <div class="row">
+            <span class="row-key">2025</span>
+            <span class="row-val">Presidential Science Scholarship for Undergraduate (CS)<span class="sub">1 of 60 students nationwide.</span></span>
+          </div>
+          <div class="row">
+            <span class="row-key">2025</span>
+            <span class="row-val">Kim Jae-chul AI Class, SNU<span class="sub">Top 30 students university-wide, advanced AI curriculum.</span></span>
+          </div>
+          <div class="row">
+            <span class="row-key">2022</span>
+            <span class="row-val">Silver Award, Korea Science &amp; Engineering Fair Intl. (KSEF)<span class="sub">Biological classification using deep learning.</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="block" id="skills">
+      <div class="wrap">
+        <p class="eyebrow">Technical Skills</p>
+        <h2>Skills</h2>
+        <div class="rows">
+          <div class="row">
+            <span class="row-key">Languages</span>
+            <span class="row-val">Java · Python · C / C++ · JavaScript · HTML / CSS</span>
+          </div>
+          <div class="row">
+            <span class="row-key">Frameworks</span>
+            <span class="row-val">Django · PyTorch · TensorFlow</span>
+          </div>
+          <div class="row">
+            <span class="row-key">Tools</span>
+            <span class="row-val">VS Code · Visual Studio · PyCharm · IntelliJ · CLion</span>
+          </div>
+          <div class="row">
+            <span class="row-key">Libraries</span>
+            <span class="row-val">pandas · NumPy · Matplotlib</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANNED COURSEWORK -->
+    <section class="block" id="courses">
+      <div class="wrap">
+        <p class="eyebrow">Looking Ahead</p>
+        <h2>Courses I plan to take</h2>
+        <div class="tags">
+          <span class="tag">Algorithms</span>
+          <span class="tag">Computer Architecture</span>
+          <span class="tag">Operating Systems</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Computer Networks</span>
+          <span class="tag">Programming Languages</span>
+        </div>
+        <p class="note">// placeholder — replace with your actual planned courses</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="block" id="contact">
+      <div class="wrap">
+        <p class="eyebrow">Contact</p>
+        <h2>Get in touch</h2>
+        <div class="contact-list">
+          <div class="row">
+            <span class="row-key">Email</span>
+            <span class="row-val"><a href="mailto:termrad6170@gmail.com">termrad6170@gmail.com</a></span>
+          </div>
+          <div class="row">
+            <span class="row-key">GitHub</span>
+            <!-- replace your-username with your GitHub handle -->
+            <span class="row-val"><a href="https://github.com/your-username">github.com/your-username</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER / AI USAGE -->
+  <footer class="foot">
+    <div class="wrap">
+      <p class="eyebrow">AI Usage</p>
+      <p>This site was created with the help of an AI coding assistant.</p>
+      <p><strong>Tool:</strong> Claude (Anthropic)</p>
+      <p><strong>Prompt used:</strong></p>
+      <p class="prompt">"Build a minimal, academic personal website from my resume for GitHub Pages — include About, Education, Projects, Awards, Skills, planned courses, and contact. Keep it simple, responsive, and accessible."</p>
+      <p class="copyright">© 2026 Jiyeon Lee · Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+</body>
 </html>
